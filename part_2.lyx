@@ -1,0 +1,1561 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage[T2A]{fontenc}
+
+\usepackage{stackrel}
+\usepackage{mathabx}
+\usepackage{mathrsfs}  
+
+\usepackage{pgfplots}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linktoc=all,
+    linkcolor=blue, 
+}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language russian
+\language_package babel
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth -2
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Преобразование Фурье
+\end_layout
+
+\begin_layout Author
+Конспект лекций С.
+ А.
+ Трескова
+\end_layout
+
+\begin_layout Date
+1 семестр 2016-2017 уч.
+ года
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Преобразование Фурье
+\end_layout
+
+\begin_layout Subsection
+Интеграл Фурье
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+Пусть функция 
+\begin_inset Formula $f$
+\end_inset
+
+ совпадает с суммой своего ряда Фурье.
+\begin_inset Formula 
+\[
+f(x)=\frac{a_{0}}{2}+\sum_{1}^{\infty}a_{n}\cos(\frac{n\pi}{l}x)+b_{n}\sin(\frac{n\pi}{l}x)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+a_{n}=\frac{1}{\pi}\int_{-l}^{l}f(t)\cos(\frac{n\pi t}{l})\mathrm{d}t
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+f(x)= & \frac{1}{2l}\int_{-l}^{l}f(t)\mathrm{d}t+\sum\frac{1}{l}\int_{-l}^{l}f(t)\cos\Big(\frac{\pi n(x-t)}{l}\Big)\mathrm{d}t=\\
+ & \frac{1}{2l}\int_{-l}^{l}f(t)\mathrm{d}t+\sum\frac{\delta z_{n}}{\pi}\int_{-l}^{l}\cos(z_{n}(x-t))f(t)\mathrm{d}t=...
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+где 
+\begin_inset Formula $\frac{n\pi}{l}=z_{n}$
+\end_inset
+
+, 
+\begin_inset Formula $\delta z_{n}=\frac{\pi}{l}$
+\end_inset
+
+.
+ Первый интеграл ограничен, т.к.
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ - интегрируема.
+\end_layout
+
+\begin_layout Standard
+Заметим, что вышеприведённая сумма, по аналогии с суммой Римана, напоминает
+ интеграл
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int\frac{1}{\pi}\int_{-\infty}^{\infty}f(t)\cos(\text{z}(t-x))\mathrm{d}t\mathrm{d}z$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Теорема
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+\paragraph_spacing single
+\begin_inset Formula $f(x)\in L_{1}(R)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\paragraph_spacing single
+На любом конечном промежутке:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+конечное число точек разрыва, причём только первого рода
+\end_layout
+
+\begin_layout Itemize
+конечное число точек недифференцируемости
+\end_layout
+
+\begin_layout Itemize
+производная ограничена 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+qquad
+\backslash
+Downarrow$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Функция совпадает со своим интегралом Фурье:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(x)=\frac{1}{\pi}\int_{0}^{\infty}\mathrm{d}z\int_{-\infty}^{\infty}f(t)\cos(\text{z}(t-x))\mathrm{d}t.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Доказательство
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int_{0}^{\infty}\mathrm{d}z\frac{1}{\pi}\int_{-\infty}^{\infty}f(t)\cos(\text{z}(t-x))\mathrm{d}t=\lim_{A\rightarrow\infty}\frac{1}{\pi}\int_{0}^{A}\mathrm{d}z\frac{1}{\pi}\int_{-\infty}^{\infty}f(t)\cos(\text{z}(t-x))\mathrm{d}t=\dots
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Если функция интегрируема по Лебегу и определена на произведении измеримых
+ множеств, то если она неотрицательна, то двойной интеграл равен повторному.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+|f(t)\cos(z(t-x))|\le|f(t)|
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Функция обладает интегрируемой мажорантой, значит, она интегрируема.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\dots= & \lim\frac{1}{\pi}\int_{-\infty}^{\infty}f(t)\mathrm{d}t\int_{0}^{A}\cos(z(t-x))\mathrm{d}z=\lim\frac{1}{\pi}\int f(t)\mathrm{d}t\frac{\sin(A(t-x))}{t-x}=\\
+ & \lim\frac{1}{\pi}\int f(u+x)\frac{\sin(Au)}{u}\mathrm{d}u=\lim\frac{1}{\pi}\int_{0}^{\infty}(f(x+t)+f(x-t))\frac{\sin(At)}{t}\mathrm{d}t=I(A)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I(A)-f(x)=\lim_{A\rightarrow\infty}\frac{1}{\pi}\int_{0}^{\infty}(f(x+t)+f(x-t)-2f(x))\frac{\sin(At)}{t}\mathrm{d}t
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Дальнейшее доказательство аналогично доказательству для рядов Фурье.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing double
+
+\series bold
+Прямое и обратное преобразования Фурье
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(x)=\frac{1}{\pi}\int_{0}^{\infty}dz\int_{-\infty}^{\infty}f(t)\cos z(x-t)\mathrm{dt}=\frac{1}{2\pi}\int_{-\infty}^{\infty}dz\int_{-\infty}^{\infty}f(t)\cos z(x-t)\mathrm{dt}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Первый интеграл (по 
+\begin_inset Formula $\text{d}z$
+\end_inset
+
+) - интеграл в смысле главного значения по Коши.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{1}{2\pi}\int_{-\infty}^{\infty}dz\int_{-\infty}^{\infty}f(t)\sin z(x-t)\mathrm{dt}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+f(x)= & \frac{1}{2\pi}\int_{-\infty}^{\infty}\text{d}z\int_{-\infty}^{\infty}f(t)\cos z(x-t)\mathrm{\text{d}t}+\frac{1}{2\pi}\int_{-\infty}^{\infty}dz\int_{-\infty}^{\infty}f(t)\sin z(x-t)\mathrm{\text{d}t}\\
+= & \frac{1}{2\pi}\int_{-\infty}^{\infty}\text{d}z\int_{-\infty}^{\infty}f(t)e^{iz(x-t)}\mathrm{\text{d}t}\\
+= & \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\text{d}ze^{izx}\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(t)e^{-izt}\mathrm{\text{d}t}=...
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Определение
+\series default
+.
+ Преобразованием Фурье функции 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ называется функция
+\begin_inset Formula 
+\[
+\widehat{f}(x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(t)e^{-izt}\mathrm{d}t=\mathscr{F}[f]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Для существования преобразования Фурье достаточно, чтобы функция была интегрируе
+ма.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+...=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}g(x)e^{izx}\mathrm{d}z
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Определение
+\series default
+.
+ Обратным преобразованием Фурье функции 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ называется функция
+\begin_inset Formula 
+\[
+\widecheck g(x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}g(x)e^{izx}\mathrm{d}z.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Обратное преобразование Фурье так же определено для интегрируемых функций.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Заметим, что
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$f(x)=
+\backslash
+widehat{
+\backslash
+widecheck{f}}=
+\backslash
+widecheck{
+\backslash
+widehat{f}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\widehat{f}(s)=\widecheck f(-s)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Лемма
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+Если
+\begin_inset Formula $f\in C,\text{производная кусочно-непрерывна }\text{и интегрируема},\text{ то }\exists\lim_{x\rightarrow\infty}f(x)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Если ещё и 
+\begin_inset Formula $f\in L_{1}$
+\end_inset
+
+, то эти предел равен нулю.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\series bold
+Свойства преобразования Фурье
+\end_layout
+
+\begin_layout Enumerate
+Линейность.
+\end_layout
+
+\begin_layout Enumerate
+Ограниченность и непрерывность
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\widehat{f}(s)\stackbin{s\rightarrow\infty}{\rightarrow}0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Если 
+\begin_inset Formula $f_{n}\stackrel{\mathbb{L}_{1}}{\rightarrow}f$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+|\widehat{f_{n}}(s)-\widehat{f}(s)|\le\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}|f_{n}(t)-f(t)|\mathrm{d}t\rightarrow0\text{ и}\text{ не }\text{зависит }\text{от }s
+\]
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newline
+\end_layout
+
+\end_inset
+
+следовательно
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+quad
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\widehat{f}_{n}\rightrightarrows\widehat{f}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\[
+\mathscr{F}[f^{(n)}](s)=(is)^{n}\widehat{f}(s)
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+quad
+\end_layout
+
+\end_inset
+
+(доказать можно, интегрируя по частям).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newline
+\end_layout
+
+\end_inset
+
+Данную формулу можно применять к поиску инегрируемых решений линейных дифференци
+альных уравнений.
+\end_layout
+
+\begin_layout Enumerate
+Если 
+\begin_inset Formula $(1+|t^{k}|)f(t)\in\mathbb{L}_{1},$
+\end_inset
+
+то преобразование Фурье 
+\begin_inset Formula $k$
+\end_inset
+
+ раз дифференцируемо.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newline
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathscr{F}^{(k)}[f](s)=(-i)^{k}\mathscr{F}[t^{k}f(t)](s)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Из третьего и пятого свойства следует 
+\begin_inset Formula $\widehat{f}(x)=o(\frac{1}{x^{n}})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+\paragraph_spacing double
+
+\series bold
+Мультииндекс
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Определение
+\series default
+.
+ Мультииндекс - это вектор из неотрицательных чисел.
+\end_layout
+
+\begin_layout Standard
+Пусть 
+\begin_inset Formula $\alpha$
+\end_inset
+
+- мультииндекс.
+\end_layout
+
+\begin_layout Standard
+Введём следующие обозначения:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $x^{\alpha}:=x_{1}^{\alpha_{1}}x_{2}^{\alpha_{2}}...$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\alpha!:=\alpha_{1}!\alpha_{2}!...$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $|\alpha|:=\sum a_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $d^{\alpha}f(t)=\frac{d^{|\alpha|}f}{d\alpha_{1}^{\alpha_{1}}d\alpha_{2}^{\alpha_{2}}...}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing double
+
+\series bold
+Многомерное преобразование Фурье
+\end_layout
+
+\begin_layout Standard
+Пусть 
+\begin_inset Formula $f$
+\end_inset
+
+ зависит от двух переменных и она замечательная.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+f(x_{1},x_{2})= & \frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{d}z_{2}\int_{-\infty}^{\infty}f(x_{1},t_{2})e^{iz_{2}(x_{2}-t_{2})}\mathrm{dt_{2}}=\\
+ & (\frac{1}{2\pi})^{2}\int_{-\infty}^{\infty}\mathrm{d}z_{2}\int_{-\infty}^{\infty}dt_{2}\int_{-\infty}^{\infty}dz_{1}\int_{-\infty}^{\infty}f(t_{1},t_{2})e^{iz_{2}(x_{2}-t_{2})}e^{iz_{1}(x_{1}-t_{1})}\mathrm{dt_{1}}=\\
+ & (\frac{1}{2\pi})^{2}\int_{R^{2}}\mathrm{d}z_{1}\mathrm{d}z_{2}e^{-i(z_{1}x_{1}+z_{2}x_{2})}\int_{R^{2}}\mathrm{d}t_{1}\mathrm{d}t_{2}f(t_{1},t_{2})e^{-i(z_{1}t_{1}+z_{2}t_{2})}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Заметим, что выражение в показателе экспоненты напоминает скалярное произведение.
+\end_layout
+
+\begin_layout Standard
+Опираясь на это, введём многомерное преобразование Фурье:
+\begin_inset Formula $\widehat{f},\widecheck{f}:\mathbb{R}^{n}\rightarrow\mathbb{C}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathscr{F}[f](s)=(\frac{1}{2\pi})^{n/2}\int_{\mathbb{R}^{n}}f(t)e^{-i(s,t)}\text{d}^{n}t
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Обратное преобразование Фурье введём так же, но с другим знаком показателя
+ экспоненты.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\series bold
+Пространство Шварца
+\end_layout
+
+\begin_layout Standard
+Введём пространство 
+\begin_inset Formula $S$
+\end_inset
+
+ - пространоство быстроубывающих функций.
+\end_layout
+
+\begin_layout Standard
+Функция называется быстроубывающей, если:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\phi\in\mathbb{C}^{\infty}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\forall\alpha,\beta\quad\sup|x^{\alpha}D^{\alpha}\phi(x)|<\infty$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $n=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $|\frac{x^{k}d^{m}\phi(x)}{dx^{m}}|=c_{km}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $|(1+x^{2})\phi|\le c_{0,0}+c_{2,0}\Rightarrow|\phi(x)|\le\frac{c_{0,0}+c_{2,0}}{1+x^{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $|\phi(x)|\le\frac{c}{1+||x||}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Будем работать с преобразованиями Фурье над 
+\begin_inset Formula $S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+
+\series bold
+Свойства многомерного преобразования Фурье
+\end_layout
+
+\begin_layout Itemize
+Линейность
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathscr{F}[t^{\alpha}f(t)](s)=i^{|\alpha|}D^{\alpha}\widehat{f}(s)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula 
+\[
+\mathscr{F}[D^{\alpha}f](s)=(\frac{1}{2\pi})^{n/2}\int_{\mathbb{R}^{n}}\frac{d^{|\alpha|}f}{d\alpha_{1}^{\alpha_{1}}d\alpha_{2}^{\alpha_{2}}...}f(t)e^{-i(s,t)}\text{d}^{n}t=(\frac{1}{2\pi})^{n/2}\int_{\mathbb{R}^{n}}\frac{d^{|\alpha|-1}f}{d\alpha_{1}^{\alpha_{1}}d\alpha_{2}^{\alpha_{2}}...}(\frac{d}{da_{n}^{a_{n}}}f(t))e^{-i(s,t)}\text{d}^{n}t=(\frac{1}{2\pi})^{n/2}\int_{\mathbb{R}^{n-1}}\text{d}^{n}t\int_{R}\frac{d^{|\alpha|-1}f}{d\alpha_{1}^{\alpha_{1}}d\alpha_{2}^{\alpha_{2}}...}(\frac{d}{da_{n}^{a_{n}}}f(t))e^{-i(s,t)}dt_{n}=...
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Оператор сдвига: 
+\begin_inset Formula $T_{t_{0}}[f](t):=f(t-t_{0})$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathscr{F}[T_{t_{0}}f](s)=(\frac{1}{2\pi})^{n/2}\int_{R^{n}}f(t-t_{0})e^{-i(s,t)}\mathrm{d}^{n}t\stackbin{u=t-t_{0}}{=}(\frac{1}{2\pi})^{n/2}\int_{R^{n}}f(u)e^{-i(s,u+t_{0})}\mathrm{d}^{n}u=e^{-i(s,t_{0})}\mathscr{F}[f](s)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathscr{F}[f(kx)](s)=(\frac{1}{2\pi})^{n/2}\int_{R^{n}}f(kx)e^{-i(s,x)}\mathrm{d}^{n}x\stackbin{t=kx}{=}\frac{1}{|k|^{n}}(\frac{1}{2\pi})^{n/2}\int_{R^{n}}f(t)e^{-i(t,\frac{s}{k})}\mathrm{d}^{n}t=\widehat{f}(\frac{s}{k})\frac{1}{|k|^{n}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Пусть 
+\begin_inset Formula $T$
+\end_inset
+
+- оператор поворота.
+\begin_inset Formula 
+\[
+\mathscr{F}[f(Tx)](s)=(\frac{1}{2\pi})^{n/2}\int_{R^{n}}f(Tt)e^{-i(s,t)}\mathrm{d}^{n}t=(\frac{1}{2\pi})^{n/2}\int_{R^{n}}f(Tt)e^{-i(Ts,Tt)}\mathrm{d}^{n}t=\widehat{f}(Ts)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Докажем, что 
+\begin_inset Formula $\widehat{f}:S\rightarrow S$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\widehat{f}(s)\in C^{\infty}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+|s^{\alpha}D^{\beta}\widehat{f}(s)|=|s^{\alpha}\mathscr{F}[t^{\beta}f(t)](s)|=|\mathscr{F}[D^{\alpha}[t^{\beta}f(t)](s)|\le const\quad\square
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Комплексное сопряжение преобразования Фурье:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\bar{\widehat{f}}=(\frac{1}{2\pi})^{n/2}(\int_{\mathbb{R}^{n}}\overline{f(t)e^{-i(s,t)}\text{d}^{n}t})=\widecheck{f}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Введём сходимость в смысле пространства 
+\begin_inset Formula $S$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{n}\stackrel{\mathbb{S}}{\rightarrow}f_{0}\text{, если }\forall\alpha,\beta:x^{\alpha}D^{\beta}f_{n}(x)\rightrightarrows x^{\alpha}D^{\beta}f_{0}(x)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Лемма
+\series default
+.
+ 
+\begin_inset Formula $\widehat{f}_{n}\stackrel{\mathbb{S}}{\rightarrow}\widehat{f}_{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+Равенство Парсеваля
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int_{R^{n}}g(s)\widehat{f}(s)e^{i(s,x)}ds= & \int_{R^{n}}g(s)e^{i(s,x)}ds(\frac{1}{2\pi})^{n/2}\int_{\mathbb{R}^{n}}f(u)e^{-i(s,u)}du=\\
+ & \int_{\mathbb{R}^{n}}f(u)\text{d}u(\frac{1}{2\pi})^{n/2}\int_{R^{n}}g(s)e^{i(s,x)-i(s,u)}\text{d}s=\\
+ & \int_{\mathbb{R}^{n}}f(u)\text{d}u(\frac{1}{2\pi})^{n/2}\int_{R^{n}}g(s)e^{i(s,x-u)}\text{d}s=\\
+ & \int_{\mathbb{R}^{n}}f(u)\text{d}u\widehat{g}(u-x)\stackbin{t=u-x}{=}\int_{\mathbb{R}^{n}}f(t+x)\widehat{g}(t)\text{d}t
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Подставим 
+\begin_inset Formula $x=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int_{\mathbb{R}^{n}}\widehat{f}(s)g(s)\text{d}s=\int_{\mathbb{R}^{n}}f(s)\widehat{g}(s)\text{d}s
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Подставим 
+\begin_inset Formula $g(s)=\overline{\widehat{h}(s)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int_{\mathbb{R}^{n}}\widehat{f}(s)\overline{\widehat{h}(s)}\text{d}s=\int_{\mathbb{R}^{n}}f(s)\overline{\widehat{h}(s)}\text{d}s
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Полученное равенство - равенство Парсеваля.
+\end_layout
+
+\begin_layout Standard
+Оно говорит нам о том, что преобразование Фурье сохраняет скалярное произведение.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+Свёртка
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Определение
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f,g:\mathbb{R}^{n}\rightarrow\mathbb{C}\qquad f_{*}g(s)=\int_{\mathbb{R}^{n}}f(t)g(s-t)\text{d}t
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Свойства:
+\end_layout
+
+\begin_layout Itemize
+Симметричность
+\begin_inset Formula 
+\[
+f_{*}g(s)=\int_{\mathbb{R}^{n}}f(t)g(s-t)\text{d}t\stackbin{u=s-t}{=}\int_{\mathbb{R}^{n}}f(s-u)g(u)\text{d}u=g_{*}f(s)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Поведение при сдвиге:
+\begin_inset Formula 
+\[
+T_{s_{0}}(f_{*}g)(s)=\int_{\mathbb{R}^{n}}f(t)g(s-s_{0}-t)\text{d}t=\int_{\mathbb{R}^{n}}f(t)g(s-(t+s_{0}))\text{d}t\stackbin{u=t+s_{0}}{=}\int_{\mathbb{R}^{n}}f(u-s_{0})g(s-u)\text{d}u=T_{s_{0}}f_{*}g(s)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Поведение при дифференцировании:
+\begin_inset Formula 
+\[
+D^{\alpha}(f_{*}g)=D^{\alpha}\int_{\mathbb{R}^{n}}f(t)g(s-t)\text{d}t=\int_{\mathbb{R}^{n}}f(t)D^{\alpha}g(s-t)\text{d}t=f_{*}D^{\alpha}g
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Связь с преобразованием Фурье:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\mathscr{F}[f_{*}g](s)= & (\frac{1}{2\pi})^{n/2}\int_{\mathbb{R}^{n}}(f_{*}g)(t)e^{-i(s,t)}\text{d}^{n}t=(\frac{1}{2\pi})^{n/2}\int_{\mathbb{R}^{n}}e^{-i(s,t)}\text{d}^{n}t\int_{\mathbb{R}^{n}}f(u)g(s-u)\text{d}u=\\
+ & (\frac{1}{2\pi})^{n/2}\int_{\mathbb{R}^{n}}f(u)\text{d}u\int_{\mathbb{R}^{n}}g(t-u)e^{-i(s,t)}\text{d}^{n}t\stackbin{v=t-u}{=}\\
+ & (\frac{1}{2\pi})^{n/2}\int_{\mathbb{R}^{n}}f(u)\text{d}u\int_{\mathbb{R}^{n}}g(v)e^{-i(s,u+v)}\text{d}^{n}v=\\
+ & (2\pi)^{n/2}\widehat{f}(s)\widehat{g}(s)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Полученная формула называется 
+\series bold
+формулой Бореля
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+Обратное преобразование Фурье - аналогично.
+\end_layout
+
+\begin_layout Itemize
+Подставим в предыдущее свойство 
+\begin_inset Formula $f=\widehat{h},\text{ }g=\widehat{v}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\widecheck{\widehat{h}_{*}\widehat{v}}=(2\pi)^{n/2}hv
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\widehat{h}_{*}\widehat{v}=(2\pi)^{n/2}\widehat{hv}
+\]
+
+\end_inset
+
+Получили ещё одну формулу Бореля.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+Формула суммирования Пуассона
+\series default
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Теорема
+\series default
+.
+ (формула суммирования Пуассона)
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Formula $f\in\mathbb{S},\quad f:\mathbb{R}\rightarrow\mathbb{C}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sqrt{2\pi}\sum_{-\infty}^{\infty}f(2\pi n+x)=\sum_{-\infty}^{\infty}\widehat{f}(n)e^{inx}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Доказательство
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+|g(x)|=|\sqrt{2\pi}\sum_{-\infty}^{\infty}f(2\pi n+x)|=\dots
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Так как функция 
+\begin_inset Formula $f$
+\end_inset
+
+ - быстроубывающая, 
+\begin_inset Formula $|f(s)|\le\frac{c}{1+|s|^{2}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\dots\le\sqrt{2\pi}\sum_{-\infty}^{\infty}\frac{c}{1+|2\pi n+x|^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Данный ряд сходится.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Заметим, что если 
+\begin_inset Formula $g$
+\end_inset
+
+ определена, то она 
+\begin_inset Formula $2\pi$
+\end_inset
+
+периодична и непрерывна.
+\end_layout
+
+\begin_layout Standard
+Заметим, что с дифференцируемостью и ограниченностью производной у нас всё
+ хорошо, так как вышеприведённый ряд сходится, ряд из производных имеет
+ интегрируемую мажоранту, а суммируемые функции - быстроубывающие.
+ То есть 
+\begin_inset Formula $g$
+\end_inset
+
+ - гладкая.
+\end_layout
+
+\begin_layout Standard
+Следовательно, 
+\begin_inset Formula $g(x)=\sum_{-\infty}^{\infty}c_{n}e^{inx}$
+\end_inset
+
+ (представима своим рядом Фурье).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+c_{n}= & \frac{1}{2\pi}\int_{0}^{2\pi}g(x)e^{-inx}\text{d}x=\\
+ & \frac{1}{\sqrt{2\pi}}\int_{0}^{2\pi}\sum_{-\infty}^{\infty}f(2\pi n+x)e^{-inx}\text{d}x=\\
+ & \frac{1}{\sqrt{2\pi}}\sum_{-\infty}^{\infty}\int_{0}^{2\pi}f(2\pi n+x)e^{-inx}\text{d}x\stackbin{t=2\pi n+x}{=}\\
+ & \frac{1}{\sqrt{2\pi}}\sum_{-\infty}^{\infty}\int_{2\pi n-x}^{2\pi n+x}f(t)e^{-int}\text{d}t=\\
+ & \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(t)e^{-int}\text{d}t=\widehat{f}(n)\qquad\square\\
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

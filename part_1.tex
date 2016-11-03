@@ -1,0 +1,534 @@
+\documentclass[12pt]{article}
+
+\usepackage{cmap}
+\usepackage{amssymb}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{hyperref}
+\usepackage{stackrel}
+\usepackage{amsmath}
+\usepackage{MnSymbol}
+\usepackage{wasysym}
+\usepackage{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=3cm}
+\usepackage{setspace}
+\newcommand{\csp}{\ensuremath{\mathbb{C}}}
+\newcommand{\real}{\ensuremath{\mathbb{R}}}
+\newcommand{\dd}{\ensuremath{\mathrm{d}}}
+\setcounter{tocdepth}{2}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
+\title{Ряды Фурье}
+
+\begin{document}
+
+\tableofcontents
+\newpage
+
+\section{Ряды Фурье}
+
+\subsection{Коэффициенты Фурье и ряд Фурье}
+
+\textbf{Определение.} Тригонометрический многочлен -- это линейная комбинация функций $\sin{nx}$ и $\cos{nx}, n \in \mathbb{N}$.
+
+\textbf{Определение.} Тригонометрический ряд Фурье -- это ряд вида $$\frac{a_0}{2} + \sum_{n=1}^\infty  \big(a_n \cos{nx} + b_n \sin{nx}\big).$$
+
+Будем рассматривать ряды, для которых выполнено условие $$\sum_{n=1}^\infty \big( |a_n| + |b_n| \big) < \infty.$$ В этом случае ряд Фурье сходится.
+
+\paragraph{}
+
+\textit{Упражнение.} Докажите, что если функция периодическая, то интеграл по периоду не зависит от места интегрирования.
+
+\paragraph{}
+
+Рассмотрим следующие интегралы:
+
+$$\int_{-\pi}^{\pi} \cos{nx} \cos{kx} \mathrm{d}x = \int_{-\pi}^{\pi} \frac{\cos{(n-k)x} + \cos{(n+k)x}}{2} \mathrm{d}x = \begin{cases}
+    0,   & n \ne k, \\
+    \pi, & n =  k \\
+\end{cases}$$
+
+
+$$\int_{-\pi}^{\pi} \sin{nx} \sin{kx} \mathrm{d}x = \int_{-\pi}^{\pi} \frac{\cos{(n-k)x} - \cos{(n+k)x}}{2} \mathrm{d}x = \begin{cases}
+    0,   & n \ne k, \\
+    \pi, & n =  k \\
+\end{cases}$$
+
+$$\int_{-\pi}^{\pi} \cos{nx} \sin{kx} \mathrm{d}x = 0 $$
+
+Заметим, что если определить на пространстве функций скалярное произведение как $$(f, g) = \int_{-\pi}^{\pi} f(x) g(x) \mathrm{d}x, $$ то синусы оказываются ортогональны косинусам. 
+
+\paragraph{}
+
+Пусть известно $f(x)$. Найдем коэффициенты разложения:
+
+\paragraph{}
+
+\textit{Случай 1.} $n \ne 0$:
+
+$$\int_{-\pi}^{\pi} f(x) \sin{nx} \mathrm{d}x = \int_{-\pi}^{\pi}\big( \frac{a_0}{2} + \sum_{k \geq 1} \big( a_k\cos{kx} + b_k \sin{kx} \big) \big) \sin{nx} \mathrm{d}x = ...$$
+Промежуток интегрирования ограниченный, сходимость ряда равномерная, следовательно, можно менять местами интеграл и суммирование.
+$$... = \frac{a_0}{2} \int \sin{nx} \dd x + \sum \int a_k\cos{kx}\sin{nx}\dd x + \sum \int b_k\sin{kx}\sin{nx}\dd x = b_n\pi .$$
+
+
+\begin{align*}
+    & \text{Аналогично предыдущему}, \\
+    & \int_{-\pi}^{\pi} f(x) \cos{nx}\dd x = \\ & \int_{-\pi}^{\pi}\big(\frac{a_0}{2} + \sum a_k\cos{kx} + b_k\sin{kx}\big)\cos{nx}\dd x = \\  
+    \frac{a_0}{2}&\int\sin{nx}\dd x + \sum\int a_k\cos{kx}\sin{nx}\dd x + \sum\int b_k\sin{kx}\sin{nx}\dd x = a_n\pi.
+\end{align*}
+
+\paragraph{}
+
+\textit{Случай 2.} $n = 0$:
+
+$$\int_{-\pi}^{\pi} f(x) \cos{nx} = \pi a_0 $$
+
+
+
+В результате имеем: 
+\begin{itemize}
+    \item $a_n = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos{nx} \dd x $
+    \item $b_n = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin{nx} \dd x $
+\end{itemize}
+
+Найденный нами коэффициенты называются \textit{коэффициентами Эйлера--Фурье}.
+
+\paragraph{}
+
+Достаточное условие сходимости ряда Фурье: $|(f(x)|$ интегрируема от $-\pi$ до $\pi$.
+
+\textbf{Лемма.} Пусть $f_n \rightrightarrows f$.
+Если есть интегрируемая мажоранта, то предельная функция будет интегрируема и $$\int f(x) \dd x = \lim \int f_n(x) \dd x. $$
+
+\paragraph{}
+
+Пусть $f \in L_1(\mathrm{R})$, где $L_1$ - это векторное пространство интегрируемых функций.
+
+Определим теперь на пространстве $L_1$ норму. Будем считать одним элементом множества класс функций, которые отличаются на множество меры ноль.
+$$||f|| = \int_\mathrm{R} |f|$$
+
+После введения нормы мы можем определить равномерную сходимость:
+$$f_n \rightrightarrows f, \quad \text{если} \quad ||f_n - f|| \rightarrow 0$$
+
+\paragraph{}
+
+\textbf{Определение} Ступенчатая функция - это конечная линейная комбинция индикаторов интервалов.
+
+\paragraph{}
+
+\textbf{Теорема} Для любого $\varepsilon > 0$ существует ступенчатая функция $h$ такая, что $||f - h|| < \varepsilon$.
+(Любую функцию можно с бесконечной точностью приблизить к ступенчатой).
+
+\vspace{1em}
+
+\textbf{Лемма} (Римана-Лебега)
+
+Если $f \in L_1(\mathrm{R})$, то $$\lim_{\lambda \to \infty} \int_{-\infty}^{\infty} f(x) \sin {\lambda x} = 0.$$
+
+\textbf{Доказательство}. \textit{Тут должно было быть доказательство, но оно потерялось. См. \href{http://old.nsu.ru/education/funcan/node39.html}{тут}.}
+
+\newpage
+\subsection {Ядро Дирихле}
+
+\textbf{Определение.} Ядром Дирихле называется следующая функция:
+
+$$ D_n(a) = \frac{1}{2} + \sum_{k=1}^{n} \cos{ak} = \frac{\sin {\big(\frac{2n+1}{2} a \big)}}{2 \sin {\frac{a}{2}}}.$$
+
+$D_n$ - чётная, 2$\pi$-периодическая функция, интеграл которой по периоду равен $\pi$.
+
+\vspace{1em}
+
+Найдём частичную сумму ряда Фурье:
+ \begin{align*}
+    S_n (x) = & \frac{a_0}{2} + \sum_{k=1}^{n} \big( a_k \cos{kx} + b_k \sin{kx} \big) = \\
+              & \frac{1}{2} \big( \frac{1}{\pi} \int_{-\pi}^{\pi} f(u) \dd u \big) + \sum_{k} \big( \big( \frac{1}{\pi} \int_{-\pi}^{\pi} f(u)\cos{ku} \dd u \big) \cos{kx} 
+              + \big( \frac{1}{\pi} \int_{-\pi}^{\pi} f(u) \sin{ku} \dd u \big) \sin{kx} \big) = \\ 
+              & \frac{1}{\pi} \int f(u) \big( \frac{1}{2} + \sum (\sin{ku}\sin{kx} + \cos{ku}\cos{kx}) \big) \dd u = \\
+              & \frac{1}{\pi} \int f(u) \big( \frac{1}{2} + \sum\cos(a-x) \big) \dd u = \frac{1}{\pi} \int f(u) D_n(u-x) \dd u \stackbin{t = u - x}{=} \\
+              & \frac{1}{\pi} \int_{-\pi}^{\pi} f(t+x) D_n (t) \dd t = \frac{1}{\pi} \int_{0}^{\pi} f(x - t) D_n(t) \dd t + \frac{1}{\pi} \int_{0}^{\pi} f(x+t) D_n(t) \dd t = \\
+              & \frac{1}{\pi} \int_{0}^{\pi} \big( f(x+t) + f(x-t) \big)) D_n(t) \dd t
+          \end{align*}
+  
+  \subsection{Принцип локализации}
+  
+  
+  Пусть $\pi > \delta > 0, \delta \rightarrow 0$.
+  
+  $$S_n = \frac{1}{\pi} \big( \int_{0}^{\delta} \dots + \int_{\delta}^{\pi} \dots \big) = 
+  \frac{1}{\pi} \int_{0}^{\delta}\dots + \frac{1}{\pi} \int_{\delta}^{\pi} (f(x+t)+f(x-t)) \frac{\sin{\frac{2n+1}{2}t}}{2\sin{\frac{t}{2}}} \dd t$$
+  
+  Воспользуемся леммой Римана-Лебега: второе слагаемое стремится к нулю при $n \rightarrow \infty$. Первое же слагаемое зависит только от поведения функции в $\delta$-окрестности.
+
+  \paragraph{} 
+
+  Таким образом, мы доказали:
+  
+  \textbf{Теорема} (Римана). Если две функции совпадают в $\delta$-окрестности точки $x$, то их ряды Фурье сходятся или расходятся одноверменно. Если их ряды Фурье сходятся,
+  то суммы рядов равны.
+  
+  При этом ряды могут кардинально отличаться друг от друга на всём промежутке.
+  
+ \newpage
+
+\subsection{Условие представимости функции рядом Фурье}
+
+ \textbf{Теорема.} Для того, чтобы функция совпадала с суммой своего ряда Фурье на всей оси, достаточны:
+  
+ \begin{itemize}
+     \item \textit{Для существования ряда Фурье: интегрируемость}
+     \item $2\pi$-периодичность
+     \item непрерывность
+         \begin{itemize}
+             \item функция имеет на периоде конечное число точек разрыва
+             \item все разрывы только первого рода
+             \item $f(x) = \frac{f(x + 0) + f(x - 0)}{2}$ ~ в точке разрыва регулярное значение
+        \end{itemize}         
+    \item дифференцируемость
+        \begin{itemize}
+            \item конечное число точек недифференцируемости
+            \item производная ограничена
+         \end{itemize}
+\end{itemize}
+
+  \paragraph{}
+  
+  \textbf{Доказательство.}
+
+  
+  $$S_n(x) - A = \frac{1}{\pi} \int_{0}^{\pi} \big( f(x+t)+f(x-t) - 2A \big) D_n \dd t$$
+  
+  \begin{align*}
+      S_n(x) - f(x) & = \frac{1}{\pi} \int_{0}^{\pi} \big( f(x+t)+f(x-t)-f(x+0)-f(x-0) \big) D_n(t) \dd t = \\
+      & = \frac{1}{\pi} \int_{0}^{\delta} (f(x+t)+f(x-t)-f(x+0)-f(x-0))D_n(t) \dd t + o(1) = \\ 
+      & = \frac{1}{\pi} \big( \int_{0}^{\delta} (f(x+t)-f(x+0))\frac{\sin(\frac{2n+1}{2}t)}{2\sin{\frac{t}{2}}} + \\
+      & \qquad{} + \int_{0}^{\delta} \left( f(x+t) - f(x+0) \right) D_n(t) \dd t \big) + o(1) =
+  \end{align*}
+  
+  Рассмотрим только первый интеграл (для второго рассуждения аналогичны). Докажем, что он стремится к нулю.
+
+\newpage
+
+  Рассмотрим функцию  $$ \frac{f(x+t)-f(x+0)}{2\sin{\frac{t}{2}}}.$$ Выберем $\delta$ так, 
+  чтобы на промежутках $(x, x + \delta]$ и $[x - \delta, x)$ у этой функции не было точек разрыва и недифференцируемости.
+  В силу необходимых условий это возможно.
+ 
+Воспользуемся теоремой Лагранжа: если функция непрерывна на отрезке и дифференцируема на интервале, найдется точка интервала такая, 
+что приращение функции на этом отрезке есть длина отрезка на значение производной функции в этой точке, 
+
+и представим числитель нашей функции в виде:
+
+$$ f(x+t)-f(x+0) = t f^\prime(p_t)$$ 
+$$ |t f^\prime(p_t)| < 2k$$
+
+Мы доказали интегрируемость нашей функции, следовательно, по теореме Римана-Лебега первый интеграл стремится к нулю.
+
+Следовательно, и исходная разность $S_n(x) - f(x) \rightarrow 0$, т.е. ряд Фурье сходится к функции $f$. 
+
+ \newpage
+\subsection{Дифференицрование и интегрирование рядов Фурье}
+  Пусть есть $f(x)$, имеющая только разрывы первого рода.
+  
+  Тогда она интегрируема.
+  
+  Тогда ей сопоставляется ряд Фурье.
+  
+  $$F(x) = \int_{0}^{x} (f(t) - \frac{a_0}{2}) \dd t$$
+  
+  $$F(0) = 0$$
+  
+  $$F(2\pi) = \int_{0}^{2\pi} \big( f(t)) - \frac{a_0}{2} \big) \dd t = \frac{a_0}{\pi} - \frac{a_0}{\pi} = 0$$
+  
+  $F$ - непрерывна, дифференцируема, ограничена, т.е. удовлетворяет всем условиям предыдущей теоремы.
+  Тогда:
+  
+  $$F(x) = \frac{A_0}{2}+ \sum \big( A_n\cos{nx} + B_n\sin{nx} \big)$$
+  
+  \begin{align*}
+      A_n & \stackbin{n > 0}{=} \frac{1}{\pi} \int_{0}^{2\pi} F(t)\cos{nt}\dd t = \frac{1}{\pi} \big( \frac{\sin{nt}}{n} F(t) - \int (f(t) - \frac{a}{2}) \frac{\sin{nt}}{n} \dd t \big) = \\
+  &= -\frac{1}{\pi} \int_{0}^{2\pi} f(t)\sin{nt}\dd t = -\frac{b_n}{n} \\ 
+  \end{align*}
+  Аналогично,
+  
+  $$ B_n = \frac{a_n}{n}$$
+  
+  $$F(0) = 0 = A_0 + \sum A_n$$
+  
+  $$A_0 = 2 \sum_{1}^{\infty} \frac{b_n}{n}$$
+  
+  \paragraph{} 
+  
+  Предположим, $\frac{a_0}{2} = 0$.
+ 
+  \begin{align*}
+      \int_{a}^{b} f(t)\dd t &= \int_{0}^{b} \big(f(t)-\frac{a_0}{2}\big)\dd t - \int_{0}^{a} \big(f(t) - \frac{a_0}{2} \big) \dd t = F(b) - F(a) = \\
+      &= \sum_{n} \frac{a_n}{n}\big( \sin{na} - \sin{nb} \big) - \sum_{n} \frac{b_n}{n} \big( \cos{na} - \cos{nb} \big) \\
+  \end{align*}
+  
+  То есть для непрерывной функции мы можем интегрировать на промежутке ряд Фурье, даже если он не сходится.
+  
+ 
+\vspace{1em}
+
+\subsection{Гладкость функции и скорость сходимости её ряда Фурье}
+
+Пусть $f \in C_1(\real)$, тогда $f(x) = $ ряд Фурье.
+
+Рассмотрим $f'$.
+
+Из условия $f \in C_1(\real)$, $f'$ можно сопоставить ряд Фурье:
+
+$$a_0' = 0 \qquad a_n' = n b_n \qquad b_n' = -n a_n$$
+
+Вывод: у гладкой функции $a_n = o(\frac{1}{n}),$ как и $ b_n$ (так как коэффициенты Фурье стремятся к нулю).
+
+
+Если $f \in C_k(\real)$, то повторяя дифференцирование $k$ раз, получим:
+
+$$a_n = o \big( \frac{1}{n^k} \big) \qquad b_n = o \big( \frac{1}{n^k} \big) $$.
+
+Вывод: чем более гладкая функция, тем быстрее её коэффициенты Фурье стремятся к нулю.
+
+\vline
+
+
+Вспомним признак Вейрштрасса равномерной сходимости ряда.
+
+Понятно, что  если функция не была непрерывной, то равномерной сходимости нет.
+
+Верно и обратное: если для функции выполнены достаточные условия сходимости ряда Фурье, то на любом отрезке, где функция непрерывна, сходимость ряда Фурье равномерная.
+
+\vspace{2em}
+
+\textbf{Определение.} Явление Гиббса — некоторое особое поведение частичных сумм ряда Фурье в окрестности точки разрыва разлагаемой функции.
+
+А именно: выбросы по амплитуде примерно на 18\%.
+
+При этом для любой разрывной функции будет одно и то же. На этом основаны методы улучшения сходимости рядов Фурье.
+
+\newpage
+
+Рассмотрим частичные суммы ряда Фурье:
+
+$$|f(x) - S_N(x)| = |R_N(x)|$$
+
+Пусть $f$ - $2\pi$-периодическая, непрерывная, дифференцируемая.
+
+$$R_N(x) = |\sum_{N+1}^{\infty} a_n\cos{nx} + b_n\sin{nx}| = \dots $$
+
+$$\sup(|a_n^{(k)}+b_n^{(k)}|) = \gamma_n \rightarrow 0, \qquad \gamma_n \le L$$
+
+$$|a_n| + |b_n| \le \frac{\gamma_n}{n^k}$$
+
+$$ \dots \le \sum_{N+1}^{\infty} |a_n| + |b_n|  \le L \sum_{N+1}^{\infty} \frac{1}{n^k} \le L \int_{N}^{\infty} \frac{1}{x^k} \dd x \le \frac{L}{n^{k-1}}$$
+
+\paragraph{}
+
+Пусть у нас есть ряд Фурье,
+$a_n, b_n = O(\frac{1}{n^2})$
+Ряд Фурье сходится (т.к. его мажорирует сходящаяся функция), сумма ряда непрерывная функция.
+
+Если 
+$a_n, b_n = O(\frac{1}{n^3})$
+, то
+формально продифференцировав ряд Фурье, получим, что коэффициенты получившегося ряда будут $O(\frac{1}{n^2})$, то есть производная тоже будет непрерывной функцией.
+
+\vspace{1em}
+
+Вывод: если $a_n, b_n = O(\frac{1}{n^{k+2}})$, то сумма ряда $f \in C^K$.
+
+\newpage
+
+\subsection{Равенство Парсеваля-Ляпунова}
+
+Пусть функции $f$ сопоставлен ряд Фурье c коэффициентами($a_n, b_n$), функции g - с коэффициентами($c_n, d_n$) 
+$f, g \in C^2(\real) \rightarrow$ ряды сходятся.
+Тогда:
+
+$$ \frac{1}{\pi} \int_{-\pi}^{\pi}f(x)g(x) \dd x = \frac{1}{\pi} \int f(x) \big( \frac{c_0}{2} + \sum c_n \cos{nx} + d_n \sin{nx} \big) \dd x 
+= c_0 a_0 / 2 + \sum \big( a_n c_n + b_n d_n \big) $$
+
+Полученное нами равенство назывется \textbf{равенство Парсеваля}.
+
+\vspace{1em}
+
+Если подставить в него $f = g$, то получится \textbf{равенство Ляпунова}:
+
+$$\frac{1}{\pi} \int_{-\pi}^{\pi} f^2(t) \dd t = \frac{a_0^2}{2} + \sum \big(a_n^2 + b_n^2 \big)$$.
+
+\vspace{1em}
+
+На самом деле для справедливости равенств достаточно, чтобы $f, g \in L_2(\real)$. 
+
+\subsection{Комплексная форма рядов Фурье}
+
+Пусть функции $f$ сопоставлен ряд Фурье.
+
+Воспользуемся известными формулами:
+
+$$\cos{nx} = \frac{e^{inx} + e^{-inx}}{2} \qquad \sin{nx} = i \frac{-e^{inx} + e^{-inx}}{2}$$
+
+\vspace{1em}
+
+\begin{align*} 
+    f & \sim \frac{a_0}{2} + \sum_{1}^{\infty} a_n  \frac{e^{inx} + e^{-inx}}{2} + b_n i \frac{-e^{inx} + e^{-inx}}{2} = \\ 
+    & = \frac{a_0}{2} + \sum_{-\infty}^{-1} \frac{a_{-n} + ib_{-n}}{2}e^{inx} + \sum_{1}^{\infty} \frac{a_n-ib_n}{2}e^{inx} = \dots
+\end{align*}
+
+Посмотрим, как выглядят коэффициенты
+
+$$\frac{a_n-ib_n}{2} := \gamma_n = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x) e^{-inx} \dd x \hspace{4em} \frac{a_0}{2} = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(t) \dd t$$
+
+$$ \dots = \sum_{-\infty}^{\infty} \gamma_n e^{ikx}$$
+
+\paragraph{}
+
+Запишем равенство Парсеваля в комплексной форме:
+
+$$ \frac{1}{\pi} \int f \overline{g} \dd x = \sum_{-\infty}^{\infty} \sigma_n \delta_n$$
+
+\subsection{Ядро Фейера}
+
+\[
+S_{n}(x)=\frac{1}{\pi}\int(f(x+t)+f(x-t))D_{n}(t)\mathrm{d}t
+\]
+
+
+\[
+\tilde{f}(x)=\frac{1}{n}\sum_{0}^{n-1}S_{k}(x)=\frac{1}{\pi}\int_{0}^{\pi}(f(x+t)+f(x-t))\frac{1}{n}\sum D_{k}(t)\mathrm{d}t
+\]
+
+
+\textbf{Определение}.$\frac{1}{n}\sum D_{k}(t)=F_{n}$- ядро Фейера.
+
+Проделаем тригонометрические преобразования:
+
+\[
+\frac{1}{n}\sum_{k=1}^{n}\frac{\cos kt-\cos(k+1)t}{4\sin^{2}\frac{t}{2}}=\frac{1}{n}\frac{1-\cos nt}{4\sin^{2}\frac{t}{2}}=\frac{1}{n}\frac{\sin^{2}\frac{n}{2}t}{2\sin^{2}\frac{t}{2}}
+\]
+
+
+\vline
+
+\textbf{Свойства ядра Фейера:}
+\begin{enumerate}
+\begin{singlespace}
+\item Ядро Фейера неотрицательно.\end{singlespace}
+
+\item $\frac{1}{\pi}\int_{0}^{\pi}F_{n}(t)\mathrm{d}t=\frac{1}{2}$
+\item Если $t\in(\delta,\pi)$, то $0<F_{n}(t)\le\frac{1}{2n\sin(\delta/2)^{2}}$,
+то есть ядро отделено от нуля.
+\end{enumerate}
+\[
+f_{n}(x)=\frac{1}{\pi}\int_{0}^{\pi}(f(x+t)+f(x-t))F_{n}(t)\mathrm{d}t
+\]
+
+
+\begin{doublespace}
+\textbf{Теорема} (Фейера). Если функция $f\in C(R)$, $2\pi$-периодическая,
+то $\tilde{f}$ сходится к $f$ равномерно на всей оси.
+\end{doublespace}
+
+\textbf{Доказательство}.
+
+\begin{align*}{1}
+|F_{n}(x)-f(x)|= & |\frac{1}{\pi}\int_{0}^{\pi}((f(x+t)+f(x-t))-2f(x))F_{n}(t)\mathrm{d}t|\le\\
+ & |\frac{1}{\pi}\int_{0}^{\delta}((f(x+t)+f(x-t))-2f(x))F_{n}(t)\mathrm{d}t|+|\frac{1}{\pi}\int_{\delta}^{\pi}\dots\mathrm{d}t|\le\\
+ & \frac{1}{\pi}\int_{0}^{\delta}(|(f(x+t)+f(x-t))-2f(x)|)F_{n}(t)\mathrm{d}t+\frac{1}{\pi}\int_{\delta}^{\pi}\dots\mathrm{d}t
+\end{align*}
+
+
+\begin{doublespace}
+В силу равномерной непрерывности $f$ можно выбрать $\delta$ так,
+что $|f(x+t)+f(x-t)|\le\epsilon/2$. \hspace{2em}Значит, первый интеграл
+$\le\frac{\epsilon}{2}$.
+
+Функция $f$ ограничена: $|f(x)<M|\rightarrow$$(|(f(x+t)+f(x-t))-2f(x)|)<4M$.
+Тогда из третьего свойства ядра Фейера можно выбрать $n$ так, что
+второй интеграл $\text{\ensuremath{\le\frac{\epsilon}{2}}}$$\quad\square$
+\end{doublespace}
+
+\newpage
+
+\subsection{Теорема Вейрштрасса о равномерном приближении непрерывной функции многочленами}
+
+\begin{doublespace}
+Докажем теорему Вейрштрасса о равномерном приближении непрерывной
+функции многочленами:
+\end{doublespace}
+
+$f\in C[a,b]\rightarrow$$|f(x)-P_{n}(x)|<\epsilon$
+
+\begin{doublespace}
+Линейной заменой превратим промежуток в $[0,\pi]$ и чётным образом
+продолжим на $[-\pi,0]$
+
+Построим сдвинутую функцию $f_{tr}:$ $\forall x\quad|f_{tr}-F_{\frac{\epsilon}{2}}(x)|<\frac{\epsilon}{2}$.
+\end{doublespace}
+
+Для $F_{\frac{e}{2}}$ имеем конечное число слагаемых вида $a_{n}\sin(nx)$.
+Будем каждое слагаемое аппроксимировать многочленом с точносью $\frac{\epsilon}{2^{n+1}}$.
+Тогда суммарная погрешность приближения функции $F$ будет $\le\frac{\epsilon}{2}$. 
+
+\begin{doublespace}
+Значит, наш итоговый многочлен отличается от $f_{tr}$ меньше, чем
+на $\epsilon$. $\quad\square$
+\end{doublespace}
+
+\newpage
+\subsection{Применение рядов Фурье к решению волнового уравнения}
+
+Формулировка задачи:
+
+Есть гибкая упругая струна, закреплённая в точках $0$ и $\pi$.
+
+\[
+y(x,t)-?\qquad y(x,0)=h(x)\qquad y_{t}^{'}(x,0)=0
+\]
+
+
+Решение:
+
+\[
+h(x)=\sum_{1}^{\infty}b_{n}\sin(nx)
+\]
+
+
+\[
+y(x,t)=\sum_{1}^{\infty}b_{n}(t)\sin(nx)
+\]
+
+
+\[
+\sum b_{k}^{''}(t)\sin(nx)=-a^{2}\sum b_{n}(t)n^{2}\sin(nx)
+\]
+
+
+\[
+b_{n}^{''}(t)+a^{2}n^{2}b_{n}(t)=0
+\]
+\[
+b_{n}(t)=A_{n}\sin(ant)+B_{n}\cos(ant)
+\]
+\[
+\sum b_{n}^{'}(0)\sin(nx)=0
+\]
+\[
+b_{n}^{'}(0)=A_{n}\cos(ant)-B_{n}\sin(ant)=0
+\]
+\[
+A_{n}=0
+\]
+\[
+y(x,t)=\sum b_{n}\cos(ant)\sin(nx)=\sum b_{n}\frac{\sin(n(x+at))+\sin((n(x-at))}{2}=\frac{h(x+at)+h(x-at)}{2}
+\]
+
+
+$h$ - дважды непрерывно дифф. функция, значит, решение найдено.
+\end{document}
